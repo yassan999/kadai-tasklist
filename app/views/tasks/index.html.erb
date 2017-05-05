@@ -1,0 +1,14 @@
+<h1>タスク管理ソフト</h1>
+
+<section>
+  <h2><%= link_to '新規タスクを追加する', new_task_path %></link_to></h2>
+</section>
+
+<section>
+  <h2>タスクリスト</h2>
+  <ul>
+    <% @tasks.each do |task| %>
+      <li><%= link_to task.id, task %> : <%= task.content %></li>
+    <% end %>
+  </ul>
+</section>
