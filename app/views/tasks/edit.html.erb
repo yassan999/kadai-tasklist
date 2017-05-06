@@ -2,6 +2,7 @@
 
 <%= form_for(@task) do |f| %>
 <%= f.text_field :content %>
+<%= f.select :status, [['not yet', 'not_yet'], ['yet', 'yet']] %>
 <%= f.submit '変更' %>
 <% end %>
 
