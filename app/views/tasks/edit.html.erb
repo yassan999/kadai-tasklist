@@ -1,9 +1,17 @@
 <h1>TaskID : <%= @task.id %>&nbsp;の編集ページ</h1>
 
-<%= form_for(@task) do |f| %>
-<%= f.text_field :content %>
-<%= f.select :status, [['not yet', 'not_yet'], ['yet', 'yet']] %>
-<%= f.submit '変更' %>
-<% end %>
-
-<%= link_to '一覧に戻る', tasks_path %>
+<div class="row">
+  <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-lg-offset-3 col-lg-6">
+    <%= form_for(@task) do |f| %>
+      <div class="form-group">
+        <%= f.label :content, 'タスク' %>
+        <%= f.text_field :content, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :status, 'タスクの状態' %>
+        <%= f.text_field :status, class: 'form-control' %>
+      </div>
+    <%= f.submit '変更', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
