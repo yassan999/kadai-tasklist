@@ -10,7 +10,7 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find_by(id: params[:id])
     @user = current_user
   end
 
@@ -49,7 +49,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     flash[:success] = 'メッセージを削除しました。'
-    redirect_back(fallback_location: root_path)
+    redirect_to root_url
   end
   
   private
