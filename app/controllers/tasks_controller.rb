@@ -30,15 +30,15 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find_by(id: params[:id])
   end
 
   def update
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find_by(id: params[:id])
     
     if @task.update(task_params)
       flash[:success] = 'タスクが変更されました。'
-      redirect_back(fallback_location: root_path)
+      redirect_to root_url
     else
       flash.now[:danger] = 'タスクが変更できませんでした。'
       render :new

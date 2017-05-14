@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: 'tasks#index'
-  resources :tasks, only: [:new, :create, :destroy]
+  resources :tasks, only: [:new, :edit, :update, :create, :destroy]
 
   
   get 'login', to: 'sessions#new'
