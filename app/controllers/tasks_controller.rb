@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+  before_action :correct_user, only: [:destroy]
+  
   def index
     if logged_in?
       @user = current_user
@@ -36,7 +38,7 @@ class TasksController < ApplicationController
     
     if @task.update(task_params)
       flash[:success] = 'タスクが変更されました。'
-      redirect_to @task
+      redirect_back(fallback_location: root_path)
     else
       flash.now[:danger] = 'タスクが変更できませんでした。'
       render :new
@@ -44,14 +46,21 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task = Task.find(params[:id])
     @task.destroy
-    
-    flash[:success] = 'タスクを削除しました。'
-    redirect_to @task
+    flash[:success] = 'メッセージを削除しました。'
+    redirect_back(fallback_location: root_path)
   end
+  
+  private
   
   def task_params
     params.require(:task).permit(:content, :status)
+  end
+  
+  def correct_user
+    @task = current_user.tasks.find_by(id: params[:id])
+    unless @task
+      redirect_to root_path
+    end
   end
 end
